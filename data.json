@@ -1,0 +1,60 @@
+{
+  "updated_at": "2026-06-19 07:33:16",
+  "timezone": "Asia/Taipei (UTC+8)",
+  "source": "https://histock.tw/stock/public.aspx",
+  "fee": 20,
+  "count": 3,
+  "data": [
+    {
+      "stock_code": "3717",
+      "stock_name": "聯嘉投控",
+      "draw_date": "2026/06/10",
+      "subscription_period": "06/04~06/08",
+      "market": "上市增資",
+      "delivery_date": "06/18",
+      "underwriting_price": 20.0,
+      "market_price": 24.5,
+      "profit": 2450.0,
+      "win_rate": 6.94,
+      "expected_value": 170.03,
+      "expected_value_after_fee": 150.03,
+      "fee": 20,
+      "worth_subscribing": "值得申購",
+      "status": "已截止"
+    },
+    {
+      "stock_code": "8074",
+      "stock_name": "鉅橡",
+      "draw_date": "2026/06/17",
+      "subscription_period": "06/11~06/15",
+      "market": "上櫃增資",
+      "delivery_date": "06/26",
+      "underwriting_price": 50.0,
+      "market_price": 74.9,
+      "profit": 24900.0,
+      "win_rate": 0.26,
+      "expected_value": 64.74,
+      "expected_value_after_fee": 44.74,
+      "fee": 20,
+      "worth_subscribing": "值得申購",
+      "status": "已截止"
+    },
+    {
+      "stock_code": "6986",
+      "stock_name": "和迅",
+      "draw_date": "2026/06/22",
+      "subscription_period": "06/15~06/17",
+      "market": "初上櫃",
+      "delivery_date": "06/26",
+      "underwriting_price": 43.91,
+      "market_price": 57.5,
+      "profit": 13590.0,
+      "win_rate": 0.0,
+      "expected_value": null,
+      "expected_value_after_fee": null,
+      "fee": 20,
+      "worth_subscribing": "資料不足",
+      "status": "申購中"
+    }
+  ]
+}
