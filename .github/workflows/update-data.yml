@@ -1,0 +1,44 @@
+name: Update IPO data
+
+on:
+  schedule:
+    # GitHub 的 cron 用 UTC。台灣時間 01:00 = 前一天 UTC 17:00。
+    - cron: "0 17 * * *"
+  workflow_dispatch: {}   # 允許在 Actions 頁面手動觸發
+
+permissions:
+  contents: write          # 讓 Action 能把 data.json commit 回 repo
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate data.json
+        run: python update_data.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --staged --quiet; then
+            echo "data.json 沒有變動，略過 commit。"
+          else
+            git commit -m "chore: 自動更新 data.json ($(TZ='Asia/Taipei' date +'%Y-%m-%d %H:%M'))"
+            git push
+          fi
