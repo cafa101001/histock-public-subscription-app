@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>股票公開申購分析</title>
+
+  <!-- PWA：加到主畫面、像 App 一樣開啟 -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#103a6b" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="申購分析" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="eyebrow">台股・抽籤試算</p>
+      <h1>股票公開申購分析</h1>
+      <p class="tagline">把「獲利 × 中籤率」算成每股期望值，扣掉手續費後給一個明確判斷。</p>
+      <div class="status-bar">
+        <span class="status-bar__item">最後更新：<strong id="updatedAt">—</strong></span>
+        <span class="status-bar__sep" aria-hidden="true">·</span>
+        <span class="status-bar__item">共 <strong id="totalCount">0</strong> 檔</span>
+        <span class="status-bar__sep" aria-hidden="true">·</span>
+        <span class="status-bar__item status-bar__item--worth">值得申購 <strong id="worthCount">0</strong> 檔</span>
+      </div>
+      <button id="installBtn" class="install-btn" type="button" hidden>＋ 安裝到主畫面</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="controls" aria-label="搜尋與篩選">
+      <div class="search">
+        <input
+          id="searchInput"
+          type="search"
+          inputmode="search"
+          placeholder="搜尋股票代號或名稱…"
+          autocomplete="off"
+          aria-label="搜尋股票代號或名稱"
+        />
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="依判斷篩選">
+        <button class="chip-btn is-active" data-filter="all">全部</button>
+        <button class="chip-btn" data-filter="值得申購">值得申購</button>
+        <button class="chip-btn" data-filter="不建議申購">不建議申購</button>
+        <button class="chip-btn" data-filter="資料不足">資料不足</button>
+      </div>
+    </section>
+
+    <p class="result-line"><span id="shownCount">0</span> 筆結果<span id="activeNote"></span></p>
+
+    <div class="table-wrap" role="region" aria-label="公開申購資料" tabindex="0">
+      <table id="ipoTable">
+        <thead>
+          <tr id="headRow"><!-- 由 script.js 產生 --></tr>
+        </thead>
+        <tbody id="tableBody"><!-- 由 script.js 產生 --></tbody>
+      </table>
+      <p id="emptyState" class="empty" hidden>沒有符合條件的資料。試試清除搜尋或切換篩選。</p>
+    </div>
+
+    <section class="method">
+      <h2>判斷怎麼來的</h2>
+      <ul>
+        <li><strong>期望值</strong>＝獲利 × 中籤率 ÷ 100（中籤率是百分比，例 0.26＝0.26%）。</li>
+        <li><strong>扣手續費後期望值</strong>＝期望值 −<span id="feeNote">20</span> 元。</li>
+        <li><strong>值得申購</strong>：扣手續費後期望值 &gt; 0；<strong>不建議申購</strong>：≤ 0；<strong>資料不足</strong>：中籤率尚未公布或缺漏。</li>
+      </ul>
+      <p class="disclaimer">
+        本工具僅根據公開申購資料與中籤率估算期望值，不構成投資建議。
+        實際申購仍需考量市場價格波動、資金凍結、交易成本與個人風險承受能力。
+      </p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>資料來源：HiStock 公開申購日程表</span>
+    <span id="loadError" class="foot__error" hidden></span>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
