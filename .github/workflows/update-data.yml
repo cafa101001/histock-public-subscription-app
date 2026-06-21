@@ -1,9 +1,6 @@
 name: Update IPO data
 
 on:
-  schedule:
-    # GitHub 的 cron 用 UTC。台灣時間 01:00 = 前一天 UTC 17:00。
-    - cron: "0 17 * * *"
   workflow_dispatch: {}   # 允許在 Actions 頁面手動觸發
 
 permissions:
